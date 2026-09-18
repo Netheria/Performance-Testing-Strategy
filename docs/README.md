@@ -1,44 +1,44 @@
-> [!WARNING]
->
-> ==================================================
-> 
-> [PLEASE READ THE FORMATTED VERSION OF THIS DOCUMENT HERE (CLICK)](https://netheria.github.io/Performance-Testing-Strategy/)
->
-> ==================================================
+<h1 style="color:#B8860B; border-bottom:3px solid rgba(184,134,11,0.35); padding-bottom:10px; margin-bottom:22px; font-weight:600; letter-spacing:0.5px;">
+  Introduction
+</h1>
 
-# Introduction
-
-**A theoretical, evidence-driven performance testing strategy for a distributed, stateful contact-center system.**
+<p><b>A theoretical, evidence-driven performance testing strategy for a distributed, stateful contact-center system.</b></p>
 
 <p align="center">
-  <img src="./assets/performance_testing_strategy_roadmap.png" width="100%" alt="Illustrative performance testing strategy roadmap: Foundation, Core performance cycle, Engineering feedback, Automation and operationalization">
+  <img src="../assets/performance_testing_strategy_roadmap.png" width="100%" alt="Illustrative performance testing strategy roadmap: Foundation, Core performance cycle, Engineering feedback, Automation and operationalization">
 </p>
 
 <p align="center"><i>Illustrative only: methodology, not a fixed calendar.<br/>Foundation → Core performance cycle → Engineering feedback → Automation.</i></p>
 
-- **Scope:** Client/Bot/Agent workflows, Message Broker, WebSockets, Database, Kubernetes.
-- **Approach:** Observe → Analyse → Optimize → Re-test; evidence over guesswork.
-- **Outcome:** Capacity, Efficiency, Stability, Regression Evidence.
+<ul>
+  <li><b>Scope:</b> Client/Bot/Agent workflows, Message Broker, WebSockets, Database, Kubernetes.</li>
+  <li><b>Approach:</b> Observe → Analyse → Optimize → Re-test; evidence over guesswork.</li>
+  <li><b>Outcome:</b> Capacity, Efficiency, Stability, Regression Evidence.</li>
+</ul>
 
-> [!WARNING]
-> **⚠️ WARNING**
->
-> - **Theoretical Performance Testing Strategy** separates the strategy from implementation details, testing frameworks, individual test plans, test cases, and test reports.
->
->   *For practical examples of how similar performance-testing principles can be implemented:*
->
->   *[k6 Performance Testing Framework](https://github.com/Netheria/k6-Performance-Testing-Framework)*
->
->   *[JMeter Performance Testing Framework](https://github.com/Netheria/JMeter-Performance-Testing-Framework)*
->
->   *These repositories are not direct implementations of this strategy, but the closest practical references that apply comparable ideas.*
-> - It separates the strategy from implementation details, testing frameworks, individual test plans, test cases, and test reports.
-> - The repository also serves a mentoring and portfolio purpose. Therefore, the strategy **may contain more explanation and contextual detail** than a concise internal process document.
->
->   *Expect a teaching-oriented level of detail, not a minimal internal checklist.*
-> - **💬 Commentary** represents my direct thoughts and additional information for a subsection's topic.
+<div style="color:#DC143C; border-left:4px solid #DC143C; background:rgba(220,20,60,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>⚠️ WARNING</b>
+  </p>
+  <ul style="margin:0; padding-left:22px; font-size:15px; font-weight:600;">
+    <li style="margin-bottom:14px;"><b>Theoretical Performance Testing Strategy</b> separates the strategy from implementation details, testing frameworks, individual test plans, test cases, and test reports.<br/></li>
+    <div style="border-left:3px solid rgba(220,20,60,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">
+      For practical examples of how similar performance-testing principles can be implemented:<br/>
+      <a href="https://github.com/Netheria/k6-Performance-Testing-Framework">k6 Performance Testing Framework</a><br/>
+      <a href="https://github.com/Netheria/JMeter-Performance-Testing-Framework">JMeter Performance Testing Framework</a> <br/>
+      These repositories are not direct implementations of this strategy, but the closest practical references that apply comparable ideas.
+    </div>
+    <li style="margin-bottom:14px;"> It separates the strategy from implementation details, testing frameworks, individual test plans, test cases, and test reports. </li>
+    <li style="margin-bottom:14px;"> The repository also serves a mentoring and portfolio purpose. Therefore, the strategy <b>may contain more explanation and contextual detail</b> than a concise internal process document. <div style="border-left:3px solid rgba(220,20,60,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;"> Expect a teaching-oriented level of detail, not a minimal internal checklist. </div>
+    </li>
+    <li> "<b style="color:#00A1A1;">💬 Commentary</b>" represents my direct thoughts and additional information for a subsection's topic. <div style="border-left:3px solid rgba(220,20,60,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;"> Look for the <b style="color:#00A1A1;">TEAL</b>-toned callouts like this one to spot my personal notes. </div>
+    </li>
+  </ul>
+</div>
 
-## About Product
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  About Product
+</h2>
 
 This strategy describes performance testing for a distributed, stateful contact-center application that handles conversations across multiple communication channels.
 
@@ -99,7 +99,9 @@ The resulting workload is not a collection of independent API requests.
 
 Client actions, Bot actions, Agent actions, asynchronous message delivery, database state and conversation assignment are interdependent parts of the same business workflow.
 
-## Operating Conditions
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Operating Conditions
+</h2>
 
 The strategy intentionally considers a constrained environment in which some information required for performance testing may be unavailable:
 
@@ -115,13 +117,19 @@ These constraints are treated as explicit limitations of the testing process rat
 
 The intended audience is broad, including technical roles such as Tech Leads, Team Leads and Developers, as well as non-technical stakeholders.
 
-<p align="center"><b>Happy Reading!</b></p>
+<p align="center" style="font-weight:600; font-size:30px;">
+  Happy Reading!
+</p>
 
 ---
 
-# Performance Testing Strategy
+<h1 style="color:#B8860B; border-bottom:3px solid rgba(184,134,11,0.35); padding-bottom:10px; margin-bottom:22px; font-weight:600; letter-spacing:0.5px;">
+  Performance Testing Strategy
+</h1>
 
-## 1. Purpose
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  1. Purpose
+</h2>
 
 The purpose of performance testing is to produce reliable evidence about how the system behaves under realistic workload and to use that evidence to make engineering decisions.
 
@@ -152,9 +160,13 @@ The underlying engineering objective is to determine the workload and infrastruc
 
 ---
 
-## 2. Strategy Principles
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  2. Strategy Principles
+</h2>
 
-### 2.1 Test System Behaviour, Not Isolated Endpoints
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  2.1 Test System Behaviour, Not Isolated Endpoints
+</h3>
 
 Performance scenarios should represent meaningful system and business workflows rather than a collection of independent requests.
 
@@ -173,7 +185,9 @@ Individual HTTP requests, database queries, broker operations and WebSocket even
 
 The purpose of the performance scenario is therefore to reproduce the behaviour of the system under realistic conditions rather than merely generate traffic against its interfaces.
 
-### 2.2 Observe Before Interpreting
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  2.2 Observe Before Interpreting
+</h3>
 
 A performance measurement should not be interpreted in isolation.
 
@@ -191,7 +205,9 @@ A slower transaction may indicate a regression or bottleneck, but a faster trans
 
 Performance results should therefore be evaluated as evidence of system behaviour rather than as isolated numerical changes.
 
-### 2.3 Preserve Evidence Independently from Presentation
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  2.3 Preserve Evidence Independently from Presentation
+</h3>
 
 Performance data should be separated from the tools used to visualize or report it.
 
@@ -208,7 +224,9 @@ These persistent results provide the historical evidence required for:
 
 The reporting or visualization layer should therefore consume stored evidence rather than become the only place where performance results exist.
 
-### 2.4 Performance Testing Is an Engineering Feedback Loop
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  2.4 Performance Testing Is an Engineering Feedback Loop
+</h3>
 
 Performance testing is an iterative engineering process rather than a one-time execution followed by a pass/fail conclusion.
 
@@ -242,7 +260,9 @@ The objective of iteration is not to repeatedly run the same test. It is to prog
 
 ---
 
-## 3. Objectives
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  3. Objectives
+</h2>
 
 The ultimate objective of performance engineering is to determine how the system can support the required workload **reliably and efficiently**, while using an appropriate amount of infrastructure resources.
 
@@ -255,7 +275,9 @@ These two outcomes are not achieved by measuring response times alone.
 
 The strategy therefore uses several complementary performance-testing objectives to understand system behaviour and determine where improvements are possible.
 
-### 3.1 Performance Characterization
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  3.1 Performance Characterization
+</h3>
 
 Establish how system behaviour changes as workload increases.
 
@@ -271,7 +293,9 @@ Characterization should identify:
 
 Characterization provides the evidence needed to understand the relationship between **workload, performance and resource consumption**.
 
-### 3.2 Capacity
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  3.2 Capacity
+</h3>
 
 Determine the sustainable workload that a defined infrastructure configuration can support while maintaining required system and business behaviour.
 
@@ -285,13 +309,16 @@ Capacity analysis should identify:
 
 Capacity establishes the baseline for determining whether the existing infrastructure is being fully utilized and whether additional workload can be supported without increasing resources.
 
-### 3.3 Resource Efficiency
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  3.3 Resource Efficiency
+</h3>
 
 Determine whether the required workload can be supported using resources more efficiently.
 
 Resource-efficiency analysis should investigate two directions:
 
 1. **Increase workload while maintaining infrastructure**
+
 2. **Maintain workload while reducing infrastructure**
 
 The objective is not to maximize resource utilization at any cost.
@@ -308,7 +335,9 @@ Resource-efficiency analysis may therefore result in recommendations for:
 - autoscaling configuration
 - other engineering changes that improve the workload-to-resource relationship.
 
-### 3.4 Stability
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  3.4 Stability
+</h3>
 
 Determine whether the system can maintain acceptable behaviour over an extended period.
 
@@ -325,7 +354,9 @@ Stability testing should identify degradation that may not be visible during sho
 
 A system that reaches a suitable capacity briefly but cannot sustain that workload is not considered operationally efficient.
 
-### 3.5 Regression Detection
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  3.5 Regression Detection
+</h3>
 
 Determine whether changes to the application or infrastructure materially change its performance behaviour.
 
@@ -342,7 +373,9 @@ Where formal performance requirements exist, they take precedence.
 
 Where formal requirements are unavailable, controlled comparison against an established reference provides evidence for identifying meaningful changes.
 
-### Objective Relationship
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Objective Relationship
+</h3>
 
 The objectives form a chain rather than independent testing activities:
 
@@ -369,11 +402,15 @@ The overall purpose is to establish whether the system can support the required 
 
 ---
 
-## 4. Scope
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  4. Scope
+</h2>
 
 The strategy covers performance characteristics of the application, its supporting infrastructure, and the end-to-end conversation workflows that connect them.
 
-### 4.1 In Scope
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  4.1 In Scope
+</h3>
 
 #### Application and Workflow Behaviour
 
@@ -423,7 +460,9 @@ The strategy covers performance characteristics of the application, its supporti
 - Historical performance comparison
 - Engineering recommendations and optimization analysis
 
-### 4.2 Out of Scope
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  4.2 Out of Scope
+</h3>
 
 Unless explicitly introduced as a separate performance objective:
 
@@ -447,7 +486,9 @@ These are possible extensions rather than core objectives.
 
 ---
 
-## 5. System Model
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  5. System Model
+</h2>
 
 This strategy targets a contact-center system that processes conversations between Clients and Agents through multiple conversation channels.
 
@@ -471,7 +512,9 @@ The performance strategy models **Client-initiated conversations**.
 
 Bot or Agent initiation of a conversation without a preceding Client message is outside the performance-testing scope.
 
-### 5.1 System Overview
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  5.1 System Overview
+</h3>
 
 The system can be viewed as several cooperating layers:
 
@@ -488,7 +531,9 @@ The system can be viewed as several cooperating layers:
 
 These components form a single business workflow even though processing may cross several application and communication boundaries.
 
-### 5.2 High-Level System Architecture
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  5.2 High-Level System Architecture
+</h3>
 
 ```mermaid
 flowchart LR
@@ -541,7 +586,9 @@ The diagram represents logical system relationships rather than deployment topol
 
 Kubernetes is the execution environment for the applicable application and infrastructure components and is therefore considered separately when infrastructure behaviour is analysed.
 
-### 5.3 Client-Initiated Conversation Flow
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  5.3 Client-Initiated Conversation Flow
+</h3>
 
 The primary performance workflow begins with a Client message.
 
@@ -587,7 +634,9 @@ The flow illustrates the major architectural path rather than prescribing a fixe
 
 Exact workflow transactions belong to the corresponding Test Plan or Scenario Specification.
 
-### 5.4 Performance-Relevant Characteristics
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  5.4 Performance-Relevant Characteristics
+</h3>
 
 The system model introduces several characteristics that directly affect performance testing:
 
@@ -623,7 +672,9 @@ Performance analysis must therefore distinguish between **individual transaction
 
 ---
 
-## 6. Performance Requirements Strategy
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  6. Performance Requirements Strategy
+</h2>
 
 Performance requirements define the expected behaviour of the system and provide the basis for evaluating whether measured performance is acceptable for the intended workload.
 
@@ -639,32 +690,29 @@ Possible sources of performance requirements are:
 
 Formal requirements should take precedence over observed production behaviour when both are available.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - **Never** underestimate Support Department and their knowledge of business client expectations.
->
->   *They are on the frontier and have the most relevant understanding.*
-> - Production performance data and formal performance requirements answer different questions.
->
->   *Production data provides evidence of values that are currently present in the system. Formal requirements represent values that are wanted or expected by the business or engineering organization. For this reason, observed production performance should not automatically be treated as the target. When a formal requirement exists, the required value takes precedence over the current observed value.*
->
->   *Example:*
->
->   | Item | Value |
->   |---|---|
->   | Production currently achieves | 2 seconds |
->   | Formal requirement | 1 second |
->
->   *The 2-second production measurement describes the current state of the system. It does not make 2 seconds an acceptable target when the defined requirement is 1 second. When no formal requirement exists, however, production data can provide valuable evidence for understanding realistic operating conditions and establishing an initial reference point.*
-> - There may be cases when defined requirements are unrealistic, won't improve user experience, or would have a negative influence on the system.
->
->   *These cases must be flagged and discussed with a team.*
-> - **Telemetry** is a general term for automatically collected information about system usage and behaviour. In practice, this can include logs, metrics, traces, database records, message-processing records and similar operational information.
->
->   *The objective is not to collect every available piece of production data. The objective is to identify the data that can explain how much the system is used, when it is used, how users behave, and which workflows are important.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li style="margin-bottom:14px;"><b>Never</b> underestimate Support Department and their knowledge of business client expectations.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">They are on the frontier and have the most relevant understanding.</div>
+    </li>
+    <li style="margin-bottom:14px;">Production performance data and formal performance requirements answer different questions.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">Production data provides evidence of <b>values that are currently present</b> in the system.<br/><br/>Formal requirements represent <b>values that are wanted or expected</b> by the business or engineering organization.<br/><br/>For this reason, observed production performance should not automatically be treated as the target.<br/><br/>When a formal requirement exists, the required value takes precedence over the current observed value.<br/><br/><b>Example</b><br/><table><tr><th>Item</th><th>Value</th></tr><tr><td>Production currently achieves</td><td>2 seconds</td></tr><tr><td>Formal requirement</td><td>1 second</td></tr></table><br/>The 2-second production measurement describes the current state of the system.<br/><br/>It does not make 2 seconds an acceptable target when the defined requirement is 1 second.<br/><br/>When no formal requirement exists, however, production data can provide valuable evidence for understanding realistic operating conditions and establishing an initial reference point.</div>
+    </li>
+    <li style="margin-bottom:14px;">There may be cases when defined requirements are unrealistic, won't improve user experience, or would have a negative influence on the system.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">These cases <b>must</b> be flagged and discussed with a team.</div>
+    </li>
+    <li><b>Telemetry</b> is a general term for automatically collected information about system usage and behaviour. In practice, this can include logs, metrics, traces, database records, message-processing records and similar operational information.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">The objective is not to collect every available piece of production data. The objective is to identify the data that can explain <b>how much the system is used, when it is used, how users behave, and which workflows are important</b>.</div>
+    </li>
+  </ul>
+</div>
 
-### Unavailable Targets
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Unavailable Targets
+</h3>
 
 When formal performance targets are unavailable, the absence of those targets should be explicitly documented rather than replaced with invented thresholds.
 
@@ -680,16 +728,22 @@ The resulting analysis may be used to:
 
 Where formal requirements are subsequently established, requirement-based evaluation can be used alongside or instead of baseline comparison.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Historical comparison is a powerful tool, but it does not mean that business expectations, even approximate ones, are omitted.
->
->   *Conclusions always have to take into account business expectations, even if they are not formally written.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>Historical comparison is a powerful tool, but it does not mean that business expectations, even approximate ones, are omitted.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">Conclusions always have to take into account business expectations, even if they are not formally written.</div>
+    </li>
+  </ul>
+</div>
 
 ---
 
-## 7. Workload Modelling Strategy
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  7. Workload Modelling Strategy
+</h2>
 
 Performance workload should be derived from **realistic system usage and business behaviour**, rather than from a list of API endpoints.
 
@@ -712,7 +766,9 @@ flowchart LR
 
 When authoritative usage data is unavailable, assumptions used to construct the workload should be explicitly documented and validated through subsequent testing.
 
-### 7.1 User Types
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  7.1 User Types
+</h3>
 
 The reference workload contains at least:
 
@@ -742,7 +798,9 @@ flowchart LR
 
 The workload model should therefore define both the actor types and the relationships between their activities.
 
-### 7.2 Stateful Workload
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  7.2 Stateful Workload
+</h3>
 
 A workload is stateful when the result or availability of an action depends on application state created or modified by previous actions or by another actor.
 
@@ -769,13 +827,19 @@ Independently generating requests for each actor may reproduce network traffic b
 
 The workflow itself is defined in the System Model and Scenario Specification.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - A performance strategy does not require every API endpoint, database query, or asynchronous operation to be enumerated. Those are implementation/inventory details. A strategy is a stable, versioned document that defines goals, methodology, principles, recommendations, standards, and governance - not a fast-changing implementation artifact. It should reference critical systems and sources of truth, and be reviewed and updated when context changes.
-> - A complex system may contain hundreds of technical operations, while only a smaller number of business workflows are necessary to represent its performance workload.
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li style="margin-bottom:14px;">A performance strategy does not require every API endpoint, database query, or asynchronous operation to be enumerated. Those are implementation/inventory details. A strategy is a stable, versioned document that defines goals, methodology, principles, recommendations, standards, and governance - not a fast-changing implementation artifact. It should reference critical systems and sources of truth, and be reviewed and updated when context changes.</li>
+    <li>A complex system may contain hundreds of technical operations, while only a smaller number of business workflows are necessary to represent its performance workload.</li>
+  </ul>
+</div>
 
-### 7.3 Think Time
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  7.3 Think Time
+</h3>
 
 Think time represents the time between user or system activities within a workflow.
 
@@ -793,7 +857,9 @@ Where possible, think-time distributions should represent realistic behaviour ra
 
 Exact values and distributions belong in the corresponding Test Plan or Scenario Specification.
 
-### 7.4 Workload Granularity
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  7.4 Workload Granularity
+</h3>
 
 Workload should be modelled at a level that represents meaningful business behaviour while allowing the underlying technical operations to remain implementation details.
 
@@ -821,14 +887,20 @@ One business transaction may therefore contain multiple technical operations acr
 
 The workload model should be defined using business workflows and meaningful transactions. Technical operations are then implemented as the mechanism required to reproduce that workload.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - The purpose of the Strategy is to define **how the workload is modelled**, while the Test Plan and implementation define **which concrete operations execute that model**.
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>The purpose of the Strategy is to define <b>how the workload is modelled</b>, while the Test Plan and implementation define <b>which concrete operations execute that model</b>.</li>
+  </ul>
+</div>
 
 ---
 
-## 8. Workload Data Sources
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  8. Workload Data Sources
+</h2>
 
 Workload modelling should be based on the best available evidence of how the system is actually used.
 
@@ -853,7 +925,9 @@ Higher-quality sources should be preferred when several sources are available.
 
 When authoritative workload information is unavailable, assumptions should be explicitly documented rather than presented as observed production behaviour.
 
-### 8.1 Production Behaviour
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  8.1 Production Behaviour
+</h3>
 
 Production-derived information is the preferred source for understanding actual workload characteristics.
 
@@ -872,13 +946,19 @@ Depending on the system, useful information may include:
 
 Production information should be analysed over a sufficiently representative period rather than relying on a single observation.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Analysis over several weeks or months may reveal recurring peak periods, weekday differences, unusual events and longer-term usage trends that are not visible in a short observation window.
-> - The larger the timespan - the better, but only if the system functionality didn't experience any dramatic changes.
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li style="margin-bottom:14px;">Analysis over several weeks or months may reveal recurring peak periods, weekday differences, unusual events and longer-term usage trends that are not visible in a short observation window.</li>
+    <li>The larger the timespan - the better, but only if the system functionality didn't experience any dramatic changes.</li>
+  </ul>
+</div>
 
-### 8.2 Production Data Investigation Sources
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  8.2 Production Data Investigation Sources
+</h3>
 
 Workload information may be distributed across several systems.
 
@@ -922,16 +1002,20 @@ flowchart LR
     class A,B,C,D,E,F,G,H,I,J box
 ```
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Production data provides information about **what is currently happening**. Business requirements describe **what behaviour is wanted or expected**. These should not be treated as interchangeable.
->
->   *For example, production data may show that most conversations currently use one channel. That does not necessarily mean that the same channel distribution is the required future workload.*
->
->   *Production research should therefore be used to build an evidence-based workload model, while requirements and explicit assumptions determine how that model should be interpreted.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>Production data provides information about <b>what is currently happening</b>. Business requirements describe <b>what behaviour is wanted or expected</b>. These should not be treated as interchangeable.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">For example, production data may show that most conversations currently use one channel. That does not necessarily mean that the same channel distribution is the required future workload.<br/><br/>Production research should therefore be used to build an evidence-based workload model, while requirements and explicit assumptions determine how that model should be interpreted.</div>
+    </li>
+  </ul>
+</div>
 
-### 8.3 Product and Marketing Analytics
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  8.3 Product and Marketing Analytics
+</h3>
 
 Product and marketing analytics can provide useful supplementary information about user behaviour.
 
@@ -946,15 +1030,21 @@ Examples include:
 
 These sources can help identify which features, pages or interaction patterns are important to users.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Behavioural analytics should not automatically be interpreted as infrastructure workload. Additional analysis may be required to translate a user interaction into the corresponding application workflow and technical workload.
->
->   *You'll learn where users click or what they use, but not the conditions why or when.*
-> - **Never** be shy to follow the user usage story manually. This often provides additional understanding and unexpected insights.
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>Behavioural analytics should not automatically be interpreted as infrastructure workload. Additional analysis may be required to translate a user interaction into the corresponding application workflow and technical workload.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">You'll learn where users click or what they use, but not the conditions why or when.</div>
+    </li>
+    <li style="margin-bottom:0;"><b>Never</b> be shy to follow the user usage story manually. This often provides additional understanding and unexpected insights.</li>
+  </ul>
+</div>
 
-### 8.4 Historical Performance Results
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  8.4 Historical Performance Results
+</h3>
 
 Historical test results can provide useful evidence when current production information is unavailable or incomplete.
 
@@ -968,7 +1058,9 @@ They may help identify:
 
 Historical results should be used with awareness of differences in application version, infrastructure, test-data state and workload model.
 
-### 8.5 Domain Knowledge and Assumptions
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  8.5 Domain Knowledge and Assumptions
+</h3>
 
 Domain knowledge can supplement measured information when direct workload evidence is unavailable.
 
@@ -999,14 +1091,20 @@ flowchart LR
 
 Only the first category should be presented as directly observed production behaviour.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - The main source of Domain Knowledge is **your team**!
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>The main source of Domain Knowledge is <b>your team</b>!</li>
+  </ul>
+</div>
 
 ---
 
-## 9. Performance Test Types
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  9. Performance Test Types
+</h2>
 
 The strategy uses several performance test types to answer different engineering questions.
 
@@ -1014,7 +1112,9 @@ A performance test type defines the **purpose, workload approach, execution cond
 
 The test types are complementary rather than mutually exclusive. A single performance investigation may combine several of them, and the sequence may change depending on the available requirements, environment, workload information and previous findings.
 
-### 9.1 Baseline / Reference Measurement
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  9.1 Baseline / Reference Measurement
+</h3>
 
 A **Baseline / Reference Measurement** establishes a documented performance reference against which comparable test results can be evaluated.
 
@@ -1040,22 +1140,26 @@ flowchart LR
 
 The higher-level source takes precedence when available.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - A test-derived reference should not be interpreted as proof that the measured behaviour is acceptable. It only provides a controlled point of comparison until a more authoritative reference can be established.
->
->   *The current build is better than the previous one. But does this mean that it meets the business and client expectations? No.*
-> - For better understanding:
->
->   *Requirement: "What should the system achieve?"*
->   *Production observation: "What does the system currently achieve?"*
->   *Test-derived reference: "What did the system achieve under controlled test conditions?"*
-> - A baseline / reference should be re-established when the conditions that give it meaning change materially.
->
->   *For example: fundamentally different workload model, infrastructure configuration, application architecture or test objective.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li style="margin-bottom:14px;">A test-derived reference should not be interpreted as proof that the measured behaviour is acceptable. It only provides a controlled point of comparison until a more authoritative reference can be established.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">The current build is better than the previous one. But does this mean that it meets the business and client expectations? No.</div>
+    </li>
+    <li style="margin-bottom:14px;">For better understanding:
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">Requirement: "What should the system achieve?"<br/><br/>Production observation: "What does the system currently achieve?"<br/><br/>Test-derived reference: "What did the system achieve under controlled test conditions?"</div>
+    </li>
+    <li>A baseline / reference should be re-established when the conditions that give it meaning change materially.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">For example:<br/><br/>fundamentally different workload model, infrastructure configuration, application architecture or test objective.</div>
+    </li>
+  </ul>
+</div>
 
-#### Methodology
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Methodology
+</h4>
 
 1. **Identify available formal requirements.**
    Determine whether Business Analysis, Product, Support or another responsible department has defined expected performance values or business-client requirements.
@@ -1075,14 +1179,20 @@ The higher-level source takes precedence when available.
 6. **Persist the reference.**
    Reference results should be stored as persistent test evidence and remain available for historical comparison.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - My advice is to **use versioning with explicit dates for reference documentation**.
->
->   *Hundreds of reference values from different sources. Tens of reference values changed because of a source change. As a result: historical reference is impossible to establish!*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>My advise is to <b>use versioning with explicit dates for reference documentation</b>.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">Hundreds of reference values from different sources<br/><br/>Tens of reference values changed because of a source change<br/><br/>As a result: historical reference is impossible to establish!</div>
+    </li>
+  </ul>
+</div>
 
-#### Reference by Performance Test Type
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Reference by Performance Test Type
+</h4>
 
 The reference is defined according to the objective of the test being performed.
 
@@ -1094,27 +1204,40 @@ For example:
 - **Scalability Testing** - expected relationship between infrastructure configuration, workload capacity and performance
 - **Regression Testing** - previously established reference behaviour of the selected build under equivalent conditions
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - The reference does not represent one universal set of values for the entire system.
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>The reference does not represent one universal set of values for the entire system.</li>
+  </ul>
+</div>
 
-### 9.2 Load Test
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  9.2 Load Test
+</h3>
 
-#### Purpose
-
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Purpose
+</h4>
 - determine whether the workload can be sustained
 - observe transaction and workflow performance
 - observe infrastructure utilization
 - verify business/workflow health during normal operating conditions.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - The purpose of Load Testing is not to discover the absolute maximum the system can survive. Its purpose is to evaluate whether the system behaves appropriately under a workload representative of intended operation.
-> - **Expected workload / operating level** here is a number of users at which the system is stable during arrival. Usually, the number is 80-90% of the maximum number of users found during the Capacity Test.
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li style="margin-bottom:14px;">The purpose of Load Testing is not to discover the absolute maximum the system can survive. Its purpose is to evaluate whether the system behaves appropriately under a workload representative of intended operation.</li>
+    <li><b>Expected workload / operating level</b> here is a number of users at which the system is stable during arrival. Usually, the number is 80-90% of the maximum number of users found during the Capacity Test.</li>
+  </ul>
+</div>
 
-#### Methodology
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Methodology
+</h4>
 
 1. Define the expected workload from requirements and available production evidence.
 2. Configure Client, Bot and Agent activity according to the workload model.
@@ -1126,12 +1249,18 @@ For example:
 
 Load testing should represent the workload the system is expected to support rather than maximize generated traffic.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Knowledge obtained from **Capacity, Stress or Scalability testing** may be used to select a realistic operating level, identify expected limits or determine appropriate infrastructure configuration.
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>Knowledge obtained from <b>Capacity, Stress or Scalability testing</b> may be used to select a realistic operating level, identify expected limits or determine appropriate infrastructure configuration.</li>
+  </ul>
+</div>
 
-#### Prerequisites / dependencies
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Prerequisites / dependencies
+</h4>
 
 - implemented and validated Test Plan
 - defined or derived expected workload
@@ -1139,9 +1268,13 @@ Load testing should represent the workload the system is expected to support rat
 - suitable test environment
 - capacity information where needed to establish the operating point
 
-### 9.3 Stress Test
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  9.3 Stress Test
+</h3>
 
-#### Purpose
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Purpose
+</h4>
 
 - deliberately increase workload beyond the expected operating level
 - identify degradation points
@@ -1150,7 +1283,9 @@ Load testing should represent the workload the system is expected to support rat
 - identify system failure modes
 - observe recovery behaviour where recovery is part of the investigation
 
-#### Methodology
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Methodology
+</h4>
 
 1. Establish a realistic initial workload.
 2. Increase workload progressively according to a defined ramp-up model.
@@ -1169,7 +1304,9 @@ Production observations can be used to understand how workload increases during 
 
 Stress testing should investigate **how the system degrades**, not merely how many requests can be generated before something fails.
 
-#### Prerequisites / dependencies
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Prerequisites / dependencies
+</h4>
 
 - implemented and validated Test Plan
 - reliable observability
@@ -1177,18 +1314,15 @@ Stress testing should investigate **how the system degrades**, not merely how ma
 - automatic or controlled failure handling where required
 - sufficient logging and execution evidence
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - The Stress testing has multiple variations concerning the workload decrease model and the number of times the failure point is reached. **There is no silver bullet strategy here**, and the chosen approach is specific to the individual product.
-> - Mindlessly increasing workload until infrastructure fails may establish a maximum failure point, but it provides limited information about how the system behaves on the way to that point.
->
->   *A useful Stress Test should expose the relationship between increasing workload, application behaviour, infrastructure utilization, degradation, saturation/failure and recovery behaviour.*
->
->   *This information can then be used to define safer operating levels, identify bottlenecks and guide capacity or optimization work.*
-> - Stress testing is usually done with 115-125% workload, but the **arrival rate of users is also a crucial point**! Arrival rate (ramp-up) shouldn't be some extreme invented value, it should be taken from peak operation times on production and tightened up a bit.
-
-The degradation relationship described above can be visualized as:
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li style="margin-bottom:14px;">The Stress testing has multiple variations concerning the workload decrease model and the number of times the failure point is reached. <b>There is no silver bullet strategy here</b>, and the chosen approach is specific to the individual product.</li>
+    <li style="margin-bottom:14px;">Mindlessly increasing workload until infrastructure fails may establish a maximum failure point, but it provides limited information about how the system behaves on the way to that point.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">
+        A useful Stress Test should expose the relationship between:
 
 ```mermaid
 flowchart LR
@@ -1205,16 +1339,29 @@ flowchart LR
     class A,B,C,D,E,F box
 ```
 
-### 9.4 Capacity Test
+This information can then be used to define safer operating levels, identify bottlenecks and guide capacity or optimization work.
+      </div>
+    </li>
+    <li>Stress testing is usually done with 115-125% workload, but the <b>arrival rate of users is also a crucial point</b>! Arrival rate (ramp-up) shouldn't be some extreme invented value, it should be taken from peak operation times on production and tighten up a bit.</li>
+  </ul>
+</div>
 
-#### Purpose
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  9.4 Capacity Test
+</h3>
+
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Purpose
+</h4>
 
 - determine sustainable workload capacity for a defined infrastructure configuration
 - identify the limiting resource or component
 - determine the relationship between workload and resource utilization
 - provide evidence for infrastructure sizing efficiency
 
-#### Methodology
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Methodology
+</h4>
 
 1. Establish initial infrastructure configuration.
 2. Increase workload gradually according to a defined ramp-up model.
@@ -1230,27 +1377,28 @@ The workload should be increased gradually enough to distinguish sustainable cap
 
 The analysis should consider both total workload and the distribution of Client, Bot and Agent activity.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - If formal initial infrastructure configuration is not defined then replicating production configuration is a reasonable choice.
-> - Gradual users increase ramp-up model is required to not stress the system (not goal of this test) and have maximum role utilization.
-> - Capacity testing should not focus solely on the maximum number of requests that can be generated regardless of which request it is and how business logic fares.
->
->   *The target is: Determine the sustainable workload that can be supported by a defined infrastructure configuration while maintaining acceptable application and business behaviour.*
-> - Capacity analysis should find an acceptable balance.
->
->   *Consider balance between:*
->   *- client users' experience / system performance*
->   *- application users' number / their utilization*
-> - Resources for the component should not be allocated to the very limit in the recommendation, as even a tiny increase would cause a failure. Take into account volatility: resources should be allocated with at least a small margin.
->
->   *Here are general rules:*
->   *1. An infrastructure configuration that supports the workload but significantly over-provisions resources may not be considered optimal.*
->   *2. An infrastructure configuration that supports maximum possible users but compromises user experience is unacceptable.*
->   *3. Margin size is debatable and must be defined by a system architect or tech lead. It is defined based on workload variability, performance volatility, scaling characteristics and business risk.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li style="margin-bottom:14px;">If formal initial infrastructure configuration is not defined then replicating production configuration is reasonable choice.</li>
+    <li style="margin-bottom:14px;">Gradual users increase ramp-up model is required to not stress the system (not goal of this test) and have maximum role utilization.</li>
+    <li style="margin-bottom:14px;">Capacity testing should not focus solely on the maximum number of requests that can be generated regardless of which request it is and how business logic fares.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">The target is: <b>Determine the sustainable workload that can be supported by a defined infrastructure configuration while maintaining acceptable application and business behaviour.</b></div>
+    </li>
+    <li style="margin-bottom:14px;">Capacity analysis should find a acceptable balance.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">consider balance between:<br/><br/>- <b>client users' experience / system performance</b><br/>- <b>application users' number / their utilization</b></div>
+    </li>
+    <li>Resources for the component should not be allocated to the very limit in the  recommendation, as even a tiny increase would cause a failure. Take into account volatility: resources should be allocated with at least a small margin.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">Here is general rules:<br/><br/>1. an infrastructure configuration that supports the workload but significantly over-provisions resources may not be considered optimal.<br/><br/>2. An infrastructure configuration that supports maximum possible users but compromises user experience is unacceptable.<br/><br/>3. Margin size is debatable and must be defined by a system architect or tech lead. It is defined based on workload variability, performance volatility, scaling characteristics and business risk.</div>
+    </li>
+  </ul>
+</div>
 
-#### Prerequisites / dependencies
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Prerequisites / dependencies
+</h4>
 
 - implemented and validated Test Plan
 - reliable observability
@@ -1258,18 +1406,24 @@ The analysis should consider both total workload and the distribution of Client,
 - automatic or controlled failure handling where required
 - sufficient logging and execution evidence
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - The prerequisites / dependencies points are the same as in Stress Test, but the logical explanation of them is totally different.
->
->   *Reliable observability and, preferably, automatic failure detection are required because Capacity Test with a gradual increase in the number of users can have a long duration. Especially because failure criteria can be forgiving and small errors are ignored.*
->
->   *Logging and execution evidence are required not just to find a single failure point but to trace the problems throughout the whole test duration.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>The prerequisites / dependencies points are the same as in Stress Test, but the logical explanation of them is totally different.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">Reliable observability and, preferably, automatic failure detection are required because Capacity Test with a gradual increase in the number of users can have a long duration. Especially because failure criteria can be forgiving and small errors are ignored.<br/><br/>Logging and execution evidence are required not just to find a single failure point but to trace the problems throughout the whole test duration.</div>
+    </li>
+  </ul>
+</div>
 
-### 9.5 Stability / Endurance Test
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  9.5 Stability / Endurance Test
+</h3>
 
-#### Purpose
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Purpose
+</h4>
 
 - evaluate system behaviour over an extended period
 - detect memory or resource drift
@@ -1277,7 +1431,9 @@ The analysis should consider both total workload and the distribution of Client,
 - identify gradual workflow degradation
 - detect infrastructure instability or repeated service restarts
 
-#### Methodology
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Methodology
+</h4>
 
 1. Define the target workload from available requirements and production evidence.
 2. Configure Client, Bot and Agent activity according to the workload model.
@@ -1294,18 +1450,21 @@ A representative sustained workload is maintained for a sufficiently long execut
 
 The analysis should distinguish temporary fluctuations from progressive deterioration.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Usually, **extended duration** means at least three times longer than load testing.
-> - The defining characteristic of a Stability / Endurance Test is the extended observation period. The workload model may be similar to Load Testing, but the analysis additionally focuses on behaviour that develops over time. In short, it has a different investigation objective and analytical approach.
->
->   *The differences are:*
->   *- Extended duration means more data points, which provides more precision in analysis of aggregation results.*
->   *- More data points provide the ability to not only use different analytical methods but also to better see trends in metrics.*
->   *- Extended duration does provide a stronger basis in identification of resource leaks and volatility increase.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li style="margin-bottom:14px;">Usually, <b>extended duration</b> means at least three times longer than load testing.</li>
+    <li>The defining characteristic of a Stability / Endurance Test is the extended observation period. The workload model may be similar to Load Testing, but the analysis additionally focuses on behaviour that develops over time. In short, it has different investigation objective and analytical approach.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">The differences are:<br/><br/>- Extended duration means more data points what does provide more precision in analysis of aggregation results.<br/>- More data points provide an ability to only use different analytical methods but also to better see trends in metrics.<br/>- Extended duration does provide stronger basis in identification of resource leaks and volatility increase.</div>
+    </li>
+  </ul>
+</div>
 
-#### Prerequisites / dependencies
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Prerequisites / dependencies
+</h4>
 
 - implemented and validated Test Plan
 - defined or derived sustained workload
@@ -1316,21 +1475,31 @@ The analysis should distinguish temporary fluctuations from progressive deterior
 - sufficient storage and retention for the increased volume of monitoring and test-result data
 - logging and execution evidence sufficient to investigate events occurring throughout the test
 
-### 9.6 Scalability Test
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  9.6 Scalability Test
+</h3>
 
-#### Purpose
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Purpose
+</h4>
 
 - determine how capacity changes when infrastructure resources change
 - evaluate whether additional resources provide useful additional capacity
 - identify non-linear scaling and changing bottlenecks
 - evaluate resource efficiency across configurations
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - From experience: regardless of how formalized scalability requirements are, the testing and/or results review must be done with DevOps. This significantly improves time efficiency and negates possible future miscommunications.
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>From experience: regardless of how formalized scalability requirements are, the testing and/or results review must be done with DevOps. This significantly improves time efficiency and negates possible future miscommunications.</li>
+  </ul>
+</div> 
 
-#### Methodology
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Methodology
+</h4>
 
 The workload is tested against controlled infrastructure configurations while keeping other relevant conditions sufficiently comparable.
 
@@ -1369,16 +1538,22 @@ Analysis should answer questions:
 
 - whether autoscaling adds new replica without significant delay
 - whether autoscaling doesn't break load balancing logic
-- whether operational resource usage is optimal
+- whether operational resource usage being optimal
 - whether downscaling doesn't break component concurrency
 - whether downscaling routes business workflow from terminated replica to available one
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Most of the time, scalability strategy is hybrid: some components use vertical scalability (where concurrency can easily be routed - like in Connector) and other horizontal (where different improvement approach is chosen - like in relational Database).
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>Most of the time, scalability strategy is hybrid: some components use vertical scalability (where concurrency can easily be routed - like in Connector) and other horizontal (where different improvement approach is chosen - like in relational Database).</li>
+  </ul>
+</div>
 
-#### Prerequisites / dependencies
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Prerequisites / dependencies
+</h4>
 
 - implemented and validated Test Plan
 - defined or derived workload model
@@ -1390,9 +1565,13 @@ Analysis should answer questions:
 - sufficient execution evidence to compare configurations under equivalent conditions
 - participation of the responsible infrastructure / DevOps personnel where infrastructure scaling behaviour or configuration is being evaluated
 
-### 9.7 Regression Test
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  9.7 Regression Test
+</h3>
 
-#### Purpose
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Purpose
+</h4>
 
 - identify meaningful performance degradation
 - confirm performance improvements
@@ -1400,7 +1579,9 @@ Analysis should answer questions:
 - distinguish application changes from differences caused by workload or environment
 - provide evidence to support a release decision.
 
-#### Methodology
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Methodology
+</h4>
 
 Regression should be done against performance requirements that define expected behavior and comparison should preserve equivalent workload, scenario, environment, data state and other relevant conditions.
 
@@ -1441,17 +1622,20 @@ flowchart LR
     class A,B,C,D,E,F,G box
 ```
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Regression Test **may not be a single test but a whole process**.
->
->   *For example:*
->   *- CI pipeline has workflow with lightweight smoke test for new build*
->   *- CI/CD has a job to automatically run regression test for new build in test / staging environment*
->   *- Results are reviewed and judgement to run additional tests is made*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>Regression Test <b>may not be a single test but a whole process</b>.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">For example:<br/><br/>- CI pipeline has workflow with lightweight <b>smoke test</b> for new build<br/><br/>- CI/CD has a job to automatically run <b>regression test</b> for new build in test / staging environment<br/><br/>- Results are reviewed and judgement to run additional tests is made</div>
+    </li>
+  </ul>
+</div> 
 
-#### Comparison Dimensions
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Comparison Dimensions
+</h4>
 
 Comparison should be performed at meaningful levels:
 
@@ -1476,7 +1660,9 @@ The comparison should also preserve equivalent test conditions:
 
 Otherwise, a difference may be caused by the test rather than the application.
 
-### 9.8 Typical Relationship Between Test Types
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  9.8 Typical Relationship Between Test Types
+</h3>
 
 The test types may be applied in different orders depending on the performance objective and available information.
 
@@ -1501,20 +1687,30 @@ flowchart LR
 
 This progression is illustrative rather than mandatory.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - For example, Capacity Testing may provide the information required to select a realistic Load Test operating point, while Stress Testing may reveal a bottleneck that must be resolved before a meaningful Stability Test can be performed.
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>For example, Capacity Testing may provide the information required to select a realistic Load Test operating point, while Stress Testing may reveal a bottleneck that must be resolved before a meaningful Stability Test can be performed.</li>
+  </ul>
+</div>
 
 ---
 
-## 10. Scenario Design
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  10. Scenario Design
+</h2>
 
 Performance scenarios should model complete workflows whenever application state, asynchronous processing or dependencies between actors affect the outcome.
 
-### Generalized Client / Agent Lifecycle
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Generalized Client / Agent Lifecycle
+</h3>
 
-#### Test Plan Scenario
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Test Plan Scenario
+</h4>
 
 The generalized scenario can be represented as a state model. Each state represents a meaningful business state of the actor, while transitions represent business actions or reactions to application events.
 
@@ -1549,7 +1745,9 @@ The diagram represents the generalized business lifecycle rather than an executa
 
 Implementation specifics, including concrete requests, events, parameters, synchronization mechanisms and timing values, are part of the Test Plan and Scenario Specification.
 
-#### Think time
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Think time
+</h4>
 
 The think time source hierarchy is:
 
@@ -1571,13 +1769,19 @@ flowchart LR
 
 When authoritative values are unavailable, assumptions must be explicitly documented and validated through subsequent testing.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - **Think time** is a very crucial business parameter which represents product usability.
-> - **Production telemetry** does provide information about current user delays but does not represent the business goal. Product improvement plan may dictate different values so the authoritative source takes precedence.
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li style="margin-bottom:14px;"><b>Think time</b> is very crucial business parameter which does represent product usability.</li>
+    <li><b>Production telemetry</b> does provide information about current user delays but does not represent the business goal. Product improvement plan may dictate different values so the authoritative source take precedence.</li>
+  </ul>
+</div>
 
-### Scenario Design Rule
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Scenario Design Rule
+</h3>
 
 A performance scenario should preserve dependencies between actors and system state.
 
@@ -1600,7 +1804,9 @@ flowchart LR
 
 Replacing this dependency chain with independent requests to individual endpoints may generate traffic but would no longer represent the same business workload.
 
-### Cross-Actor Coordination
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Cross-Actor Coordination
+</h3>
 
 When a workflow contains dependencies between actors, the scenario implementation must ensure that an actor can react to the required state change or event before continuing with the dependent business action.
 
@@ -1624,7 +1830,9 @@ The Strategy defines the required dependency between these activities. The mecha
 
 ---
 
-## 11. Observability Strategy
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  11. Observability Strategy
+</h2>
 
 Performance testing should provide enough observable evidence to explain how the system behaves under workload.
 
@@ -1637,7 +1845,7 @@ Observability must cover not only the time taken to complete individual technica
 - whether infrastructure resources were used efficiently
 - whether asynchronous processing remained healthy
 
-The observability strategy is therefore divided into complementary layers:
+The observability strategy is therefore divided into five complementary layers:
 
 1. Workload Observability
 2. Application Performance Metrics
@@ -1647,7 +1855,9 @@ The observability strategy is therefore divided into complementary layers:
 
 No single layer is sufficient for performance interpretation.
 
-### 11.1 Workload Observability
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  11.1 Workload Observability
+</h3>
 
 The generated workload itself must be observable.
 
@@ -1666,14 +1876,20 @@ The test should provide evidence for:
 - achieved workload versus intended workload
 - workload phase and duration
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Workload observability is required to distinguish application behaviour from problems in workload generation.
->
->   *For example, a reduction in application throughput should not automatically be interpreted as application degradation if the load generator failed to maintain the intended workload.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>Workload observability is required to distinguish application behaviour from problems in workload generation.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">For example, a reduction in application throughput should not automatically be interpreted as application degradation if the load generator failed to maintain the intended workload.</div>
+    </li>
+  </ul>
+</div>
 
-### 11.2 Application Performance Metrics
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  11.2 Application Performance Metrics
+</h3>
 
 Application performance metrics should describe the time, volume and outcome of relevant technical operations and business transactions.
 
@@ -1704,7 +1920,9 @@ Metrics should be distinguishable by meaningful dimensions such as:
 
 Application metrics should allow performance analysis at both individual-operation and workflow levels.
 
-### 11.3 Message Broker and Asynchronous Communication Metrics
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  11.3 Message Broker and Asynchronous Communication Metrics
+</h3>
 
 Because Connector-to-Backend communication is mediated by a Message Broker, broker behaviour must be observable as part of the application workflow.
 
@@ -1735,7 +1953,9 @@ For client-visible message delivery, broker-level measurements should be correla
 
 A successful Client request therefore should not automatically be treated as successful end-to-end message delivery.
 
-### 11.4 Connector and External Communication Metrics
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  11.4 Connector and External Communication Metrics
+</h3>
 
 Each Connector should be observable independently because a separate Connector exists for each conversation channel.
 
@@ -1756,7 +1976,9 @@ Metrics should allow comparison between different Connectors or conversation cha
 
 A channel-specific degradation should therefore be distinguishable from Backend-wide degradation.
 
-### 11.5 Database Metrics
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  11.5 Database Metrics
+</h3>
 
 Database observability should focus on database behaviour relevant to the tested workflows rather than attempt to replace dedicated database-performance engineering.
 
@@ -1777,7 +1999,9 @@ The objective is to determine whether database behaviour contributes to applicat
 
 Detailed query optimization and database internals remain outside the core scope unless introduced as a separate performance objective.
 
-### 11.6 WebSocket Metrics
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  11.6 WebSocket Metrics
+</h3>
 
 WebSocket communication should be observable separately from ordinary HTTP request performance.
 
@@ -1814,7 +2038,9 @@ flowchart LR
 
 A delay or loss at any stage may affect Agent workflow behaviour even when the underlying HTTP operations remain within expected latency.
 
-### 11.7 Infrastructure Metrics
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  11.7 Infrastructure Metrics
+</h3>
 
 Infrastructure observability should identify how resource consumption changes with workload.
 
@@ -1839,7 +2065,9 @@ Resource behaviour should be observed at a level that allows individual replicas
 
 Aggregate component behaviour should additionally be analysed across all replicas when determining overall resource efficiency or scaling behaviour.
 
-### 11.8 Business / Workflow Metrics
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  11.8 Business / Workflow Metrics
+</h3>
 
 Business (Meta) and workflow metrics provide evidence that the system continues to perform the intended business process under load.
 
@@ -1860,18 +2088,16 @@ The strategy should capture, where applicable:
 
 These metrics should be used to identify degradation that may not be visible through technical latency metrics.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - The strategy intentionally distinguishes between **technical metrics** and **business / workflow metrics**.
-> - Latency and volatility (spread) don't show the healthiness of the business workflow.
->
->   *For example:*
->
->   *HTTP latency remains stable → Message Broker latency increases → Waiting conversations increase → Agent utilization decreases → Potential asynchronous workflow degradation.*
-
-A visualization of that example:
-
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li style="margin-bottom:14px;">The strategy intentionally distinguishes between <b>technical metrics</b> and <b>business / workflow metrics</b>.</li>
+    <li>Latency and volatility (spread) don't show the healthiness of the business workflow.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">
+        For example:
+        
 ```mermaid
 flowchart LR
     A["<b>HTTP latency<br/>remains stable</b>"]
@@ -1886,7 +2112,15 @@ flowchart LR
     class A,B,C,D,E box
 ```
 
-### 11.9 Observability Correlation
+If we see **Agent utilization** value we can instantly make an observation that business logic doesn't work as intended.
+      </div>
+    </li>
+  </ul>
+</div>
+
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  11.9 Observability Correlation
+</h3>
 
 The individual observability layers should not be interpreted independently.
 
@@ -1923,17 +2157,23 @@ A single metric should therefore normally be treated as an observation requiring
 
 ---
 
-## 12. Metric Aggregation & Analysis
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  12. Metric Aggregation & Analysis
+</h2>
 
 Collected metrics should be transformed into analytical evidence at a level that corresponds to the question being investigated.
 
 The aggregation level should preserve the meaning of the underlying measurements rather than combine unrelated operations simply because they occurred during the same test.
 
-### 12.1 Analysis Levels
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  12.1 Analysis Levels
+</h3>
 
 Performance analysis should distinguish between different levels of system behaviour.
 
-#### Level 1 - Logical Transaction Group Behaviour
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Level 1 - Logical Transaction Group Behaviour
+</h4>
 
 Logical transaction groups represent a meaningful set of technical operations belonging to the same business or workflow area.
 
@@ -1946,7 +2186,9 @@ This level is used to answer questions such as:
 - Which workflow group degraded or improved?
 - Did throughput remain consistent?
 
-#### Level 2 - Individual Transaction Behaviour
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Level 2 - Individual Transaction Behaviour
+</h4>
 
 Individual transactions represent specific business or technical operations within a logical group.
 
@@ -1958,7 +2200,9 @@ This level is used to determine:
 - whether the issue is isolated to one operation
 - whether several operations exhibit the same degradation pattern
 
-#### Level 3 - Component Behaviour
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Level 3 - Component Behaviour
+</h4>
 
 Component-level analysis examines the behaviour of relevant application and infrastructure components, including:
 
@@ -1971,7 +2215,9 @@ Component-level analysis examines the behaviour of relevant application and infr
 
 This level is used to identify where performance changes occur and whether component behaviour correlates with transaction or workflow degradation.
 
-#### Level 4 - Business / Workflow Behaviour
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Level 4 - Business / Workflow Behaviour
+</h4>
 
 Business and workflow analysis determines whether technical behaviour resulted in an observable change to the intended workload.
 
@@ -1987,7 +2233,9 @@ Examples include:
 
 A performance conclusion should use the lowest level necessary to explain the observed behaviour while retaining the higher-level context.
 
-### 12.2 Metric Aggregation
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  12.2 Metric Aggregation
+</h3>
 
 Metrics should be aggregated according to their semantic meaning.
 
@@ -2004,38 +2252,48 @@ Depending on the metric and investigation, analysis may use:
 
 Aggregation should be performed for both logical transaction groups and individual transactions where meaningful.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Unrelated operations should not be combined into a single aggregate merely because they were executed during the same test.
->
->   *For example, combining Client message delivery, Agent authentication and database monitoring operations into one latency aggregate would produce a number without a useful semantic interpretation.*
-> - Aggregation detail should be selected according to data density and the purpose of the analysis.
->
->   *The objective is to retain enough detail to identify meaningful behaviour without producing unnecessarily fragmented datasets.*
->
->   *Using a 5s bucket when data points are 10s apart wouldn't provide meaningful insights.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li style="margin-bottom:14px;">Unrelated operations should not be combined into a single aggregate merely because they were executed during the same test.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">For example, combining Client message delivery, Agent authentication and database monitoring operations into one latency aggregate would produce a number without a useful semantic interpretation.</div>
+    </li>
+    <li>Aggregation detail should be selected according to data density and the purpose of the analysis.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">The objective is to retain enough detail to identify meaningful behaviour without producing unnecessarily fragmented datasets.<br/><br/>Using 5s bucket when data points are 10s apart wouldn't provide meaningful insights.</div>
+    </li>
+  </ul>
+</div>
 
-### 12.3 Time Periods
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  12.3 Time Periods
+</h3>
 
 Performance results should be segmented into meaningful periods so that transient and sustained behaviour can be distinguished.
 
-Definitions for periods:
+Definition for periods:
 
-- **Ramp-Up** - workload is increasing and the system may be warming up
-- **Max Load / Steady State** - intended sustained workload
-- **Whole Run** - complete execution
+* **Ramp-Up** - workload is increasing and the system may be warming up
+* **Max Load / Steady State** - intended sustained workload
+* **Whole Run** - complete execution
 
 Any period may be further divided into sub-periods when additional resolution is useful.
 
 Time segmentation should be selected according to the duration and objective of the test.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Long Stability / Endurance Test may be divided into equal or otherwise meaningful intervals to make gradual performance or resource changes visible.
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>Long Stability / Endurance Test may be divided into equal or otherwise meaningful intervals to make gradual performance or resource changes visible.</li>
+  </ul>
+</div>
 
-### 12.4 Variability and Spread
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  12.4 Variability and Spread
+</h3>
 
 Performance analysis should consider not only the central tendency of a metric but also its variability.
 
@@ -2068,12 +2326,18 @@ Spread should be analysed for both logical transaction groups and individual tra
 
 A high spread does not by itself identify the cause of variability. It identifies behaviour that requires investigation.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Why not standard deviation? From experience, in most cases, people do not understand its meaning.
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>Why not standard deviation? From experience, in most cases, people do not understand its meaning.</li>
+  </ul>
+</div>
 
-### 12.5 Data Density and Aggregation Detail
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  12.5 Data Density and Aggregation Detail
+</h3>
 
 The amount of aggregation detail should reflect the amount of available data.
 
@@ -2091,7 +2355,9 @@ The appropriate level of detail is therefore determined by:
 - required analytical resolution
 - semantic meaning of the metric
 
-### 12.6 Comparative Analysis
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  12.6 Comparative Analysis
+</h3>
 
 Metrics should be compared using equivalent semantic and temporal boundaries.
 
@@ -2107,7 +2373,9 @@ For build-to-build comparison, the same principles apply to the workload and env
 
 Differences should not be interpreted as performance changes when the compared datasets represent materially different workloads, scenarios or measurement conditions.
 
-### 12.7 Interpretation
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  12.7 Interpretation
+</h3>
 
 Aggregated metrics are evidence for interpretation, not conclusions by themselves.
 
@@ -2146,22 +2414,20 @@ flowchart LR
 
 The evidence should be correlated across the relevant observability layers before identifying a probable cause.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - The purpose of metric aggregation is not to reduce the amount of data as much as possible.
->
->   *It is to transform large quantities of observations into datasets that are easier to interpret while preserving the information required to identify meaningful performance behaviour.*
->
->   *The appropriate aggregation therefore depends on what question the analysis is trying to answer.*
->
->   *The same raw data may legitimately require several views.*
->
->   *For example: Whole Run → Logical Transaction Group → Individual Transaction → Specific Time Period.*
->
->   *This allows a performance investigation to move from a general observation toward the specific operation or period responsible for it without losing the original context.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>The purpose of metric aggregation is not to reduce the amount of data as much as possible.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">
+        It is to transform large quantities of observations into datasets that are easier to interpret while preserving the information required to identify meaningful performance behaviour.
+        
+The appropriate aggregation therefore depends on <b>what question the analysis is trying to answer</b>.
 
-A visualization of that drill-down path:
+The same raw data may legitimately require several views.
+
+For example:
 
 ```mermaid
 flowchart LR
@@ -2176,15 +2442,25 @@ flowchart LR
     class A,B,C,D box
 ```
 
+This allows a performance investigation to move from a general observation toward the specific operation or period responsible for it without losing the original context.
+      </div>
+    </li>
+  </ul>
+</div>
+
 ---
 
-## 13. Entry Conditions
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  13. Entry Conditions
+</h2>
 
 A performance test should begin only after the conditions required to produce interpretable results have been verified.
 
 Entry conditions are evaluated against the selected **test type, workload model and environment**. Not every condition is equally applicable to every performance test.
 
-### 13.1 Test Definition
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  13.1 Test Definition
+</h3>
 
 Before execution:
 
@@ -2199,7 +2475,9 @@ Before execution:
 
 The test should not begin when the intended workload can only be described as an undefined number of requests or virtual users.
 
-### 13.2 Test Environment
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  13.2 Test Environment
+</h3>
 
 Before execution:
 
@@ -2214,7 +2492,9 @@ Before execution:
 
 Any known difference from the intended production or reference environment should be documented before execution.
 
-### 13.3 Test Data
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  13.3 Test Data
+</h3>
 
 Before execution:
 
@@ -2227,7 +2507,9 @@ Before execution:
 
 Insufficient or incorrect test data should prevent execution when it can materially change the workload or application behaviour.
 
-### 13.4 Observability
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  13.4 Observability
+</h3>
 
 Before execution, verify that the required evidence can actually be collected.
 
@@ -2246,7 +2528,9 @@ layers.
 
 A metric should not be considered available merely because the monitoring system exists. The expected data should be verified before execution.
 
-### 13.5 Failure and Recovery Conditions
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  13.5 Failure and Recovery Conditions
+</h3>
 
 For tests where degradation or failure is expected:
 
@@ -2258,7 +2542,9 @@ For tests where degradation or failure is expected:
 
 This is particularly important for Stress and Capacity Testing, where continuing execution after a critical infrastructure condition may invalidate later observations or unnecessarily damage the test environment.
 
-### 13.6 Reference and Comparison Conditions
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  13.6 Reference and Comparison Conditions
+</h3>
 
 Where comparison is part of the test objective:
 
@@ -2269,7 +2555,9 @@ Where comparison is part of the test objective:
 - environment differences are known
 - required data-state equivalence is confirmed
 
-### Entry Decision
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Entry Decision
+</h3>
 
 The test should proceed only when all **critical** entry conditions for the selected objective are satisfied.
 
@@ -2279,13 +2567,17 @@ If a missing condition can materially affect workload correctness, observability
 
 ---
 
-## 14. Exit & Decision Criteria
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  14. Exit & Decision Criteria
+</h2>
 
 A performance test should produce enough validated evidence to support an engineering decision.
 
 The decision process should distinguish between **test execution validity**, **observed system behaviour** and **the resulting engineering decision**.
 
-### 14.1 Exit Conditions
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  14.1 Exit Conditions
+</h3>
 
 A performance investigation can be considered complete when:
 
@@ -2300,7 +2592,9 @@ A performance investigation can be considered complete when:
 
 Completion of the execution itself does not imply that the system passed.
 
-### 14.2 Decision Process
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  14.2 Decision Process
+</h3>
 
 Results should be interpreted in the following order:
 
@@ -2320,7 +2614,9 @@ flowchart LR
     class A,B,C,D,E,F,G box
 ```
 
-### 14.3 Decision Categories
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  14.3 Decision Categories
+</h3>
 
 The result should be assigned to an appropriate category:
 
@@ -2336,14 +2632,20 @@ The result should be assigned to an appropriate category:
 
 A result may belong to more than one analytical category. For example, a test may identify a capacity limitation and simultaneously provide evidence of an optimization opportunity.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - A performance result is not simply **Pass** or **Fail**.
->
->   *The same execution can establish capacity, expose a bottleneck, demonstrate an improvement and reveal an unresolved risk at the same time.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>A performance result is not simply <b>Pass</b> or <b>Fail</b>.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">The same execution can establish capacity, expose a bottleneck, demonstrate an improvement and reveal an unresolved risk at the same time.</div>
+    </li>
+  </ul>
+</div>
 
-### 14.4 Decision Evidence
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  14.4 Decision Evidence
+</h3>
 
 The decision should be supported by evidence appropriate to the selected test objective.
 
@@ -2362,24 +2664,30 @@ Examples include:
 
 Formal organizational acceptance criteria, release procedures and risk ownership are defined outside this Strategy when they exist.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - A final release or production decision remains the responsibility of the organization or role owning that decision.
->
->   *Business risks are a black box for us.*
->
->   *Imagine a situation when build did not receive a 'green light' from our side, but it has to be released because it contains a new feature that your company must provide according to the contract.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>A final release or production decision remains the responsibility of the organization or role owning that decision.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">Business risks are a black box for us.<br/><br/>Imagine a situation when build <b>did not</b> receive a 'green light' from our side, but it has to be released because it contains a new feature that your company <b>must</b> provide according to the contract.</div>
+    </li>
+  </ul>
+</div>
 
 ---
 
-## 15. Test Validity
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  15. Test Validity
+</h2>
 
 A performance result should be interpreted only when the execution produced the intended workload and sufficient evidence was collected under controlled conditions.
 
 Successful completion of the test execution does not by itself make the result valid.
 
-### 15.1 Valid Result
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  15.1 Valid Result
+</h3>
 
 A result can be considered valid for its intended purpose when:
 
@@ -2393,7 +2701,9 @@ A result can be considered valid for its intended purpose when:
 - required external dependencies remained available
 - sufficient data was collected for the intended analysis
 
-### 15.2 Qualified Result
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  15.2 Qualified Result
+</h3>
 
 A result may still be useful when a deviation exists but its effect can be understood and does not prevent the intended conclusion.
 
@@ -2407,7 +2717,9 @@ Examples include:
 
 Such deviations should be documented together with the affected conclusion.
 
-### 15.3 Invalid Result
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  15.3 Invalid Result
+</h3>
 
 A performance result should be considered invalid when the available evidence cannot support the intended conclusion.
 
@@ -2426,14 +2738,20 @@ Examples include:
 - the application was unstable before execution
 - significant unexplained infrastructure events occurred
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Reminder: failure is also a valid result.
->
->   *A new build being 'bad' is one thing, and having corrupted results or being unable to execute a test is an absolutely different thing.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>Reminder: failure is also a valid result.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">A new build being 'bad' is one thing, and having corrupted results or being unable to execute a test is an absolutely different thing.</div>
+    </li>
+  </ul>
+</div>
 
-### 15.4 Validity Check
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  15.4 Validity Check
+</h3>
 
 Validity should be evaluated before interpreting performance results.
 
@@ -2456,7 +2774,9 @@ If the result is invalid, performance conclusions should not be drawn from that 
 
 The test may instead be used to investigate the reason for invalidation, provided that the limitations are clearly separated from conclusions about application performance.
 
-### 15.5 Distributed Execution Validity
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  15.5 Distributed Execution Validity
+</h3>
 
 Distributed performance testing introduces additional validity conditions.
 
@@ -2473,23 +2793,29 @@ The loss of shared coordination or result infrastructure can invalidate both wor
 
 ---
 
-## 16. Distributed Performance Testing
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  16. Distributed Performance Testing
+</h2>
 
 Performance workload may be distributed across multiple load-generation workers when a single worker cannot generate the required workload or when distributed execution is required by the test objective.
 
 Distribution should increase workload-generation capacity without changing the defined workload model.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Distributed execution is not a performance-testing objective by itself.
->
->   *It is an execution technique used when the required workload, scenario complexity or test environment exceeds the practical capabilities of a single load generator.*
->
->   *Adding workers should therefore increase the ability to generate the intended workload without unintentionally changing the workload being measured.*
-> - Distributed execution may even be required for other reasons, such as when **multi-regional user load must be simulated**.
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li style="margin-bottom:14px;">Distributed execution is not a performance-testing objective by itself.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">It is an execution technique used when the required workload, scenario complexity or test environment exceeds the practical capabilities of a single load generator.<br/><br/>Adding workers should therefore increase the ability to generate the intended workload without unintentionally changing the workload being measured.</div>
+    </li>
+    <li>Distributed execution may even be required for other reasons, such as when <b>multi-regional user load must be simulated</b>.</li>
+  </ul>
+</div>
 
-### 16.1 Distributed Execution Principles
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  16.1 Distributed Execution Principles
+</h3>
 
 A distributed execution should preserve:
 
@@ -2504,7 +2830,9 @@ Workers may require shared coordination when the performance scenario contains d
 
 The coordination mechanism is implementation-specific and should not be prescribed by the Strategy.
 
-### 16.2 Load Generator Capacity
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  16.2 Load Generator Capacity
+</h3>
 
 Load-generation infrastructure should have sufficient capacity to generate the intended workload without becoming the limiting factor of the test.
 
@@ -2520,7 +2848,9 @@ The load-generation environment should therefore be monitored for:
 
 A saturated or unstable load generator may produce an invalid performance result even when the application under test remains healthy.
 
-### 16.3 Measurement and Result Consistency
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  16.3 Measurement and Result Consistency
+</h3>
 
 Distributed workers should contribute to a common measurement model so that results from the complete execution can be analysed consistently.
 
@@ -2536,29 +2866,41 @@ The implementation may use different mechanisms to provide these capabilities. T
 
 ---
 
-## 17. Reporting Strategy
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  17. Reporting Strategy
+</h2>
 
 Performance reporting should transform collected performance evidence into information that can be understood, compared and used for engineering decisions.
 
 A performance report should answer four questions:
 
-### What happened?
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  What happened?
+</h3>
 
 Describe the tested workload, execution conditions and observed system behaviour.
 
-### Did performance change?
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Did performance change?
+</h3>
 
 Compare the observed behaviour against applicable performance requirements or the selected reference.
 
-### Why did it happen?
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Why did it happen?
+</h3>
 
 Correlate application, Connector, Message Broker, database, WebSocket, infrastructure and business/workflow evidence to identify the likely contributors to the observed behaviour.
 
-### What should happen next?
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  What should happen next?
+</h3>
 
 Provide actionable engineering recommendations, additional investigation requirements or confirmation that no further performance action is currently indicated.
 
-### 17.1 Reporting Requirements
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  17.1 Reporting Requirements
+</h3>
 
 The reporting process should preserve enough information to understand both the execution and the resulting behaviour.
 
@@ -2584,44 +2926,56 @@ A report should provide, where applicable:
 
 The report should distinguish measured facts from interpretation and recommendations.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Native load-generator reporting should not be viewed as a solution for stateful or complex systems.
->
->   *Native reports are generally centered around technical load-generation measurements such as requests, response times, throughput, and errors.*
->
->   *The list above is a bit... more complex.*
->
->   *From my experience, I haven't seen any plugin or 3rd party system that would satisfy such needs.*
->
->   *Therefore, a custom reporting service is the answer, and its development must be thought out as soon as possible.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>Native load-generator reporting should not be viewed as a solution for stateful or complex systems.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">Native reports are generally centered around technical load-generation measurements such as requests, response times, throughput, and errors.<br/><br/>The list above is a bit... <b>more complex</b>.<br/><br/>From my experience, I haven't seen any plugin or 3rd party system that would satisfy such needs.<br/><br/>Therefore, a custom reporting service is the answer, and its development must be thought out as soon as possible.</div>
+    </li>
+  </ul>
+</div>
 
-### 17.2 Reporting Periods
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  17.2 Reporting Periods
+</h3>
 
 The reporting strategy separates the execution into meaningful time periods so that transient behaviour can be distinguished from sustained behaviour.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Any period may be further divided into smaller sub-periods when additional analytical resolution is useful, particularly during long Stability / Endurance Tests.
-> - The distinction between periods is intended to prevent transient Ramp-Up behaviour from being interpreted as representative of steady-state performance.
->
->   *For example, setup operations are not part of steady phase.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li style="margin-bottom:14px;">Any period may be further divided into smaller sub-periods when additional analytical resolution is useful, particularly during long Stability / Endurance Tests.</li>
+    <li>The distinction between periods is intended to prevent transient Ramp-Up behaviour from being interpreted as representative of steady-state performance.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">For example, setup operations are not part of steady phase.</div>
+    </li>
+  </ul>
+</div>
 
-#### Ramp-Up
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Ramp-Up
+</h4>
 
 The period during which workload is being established or increased. System stabilization may occur during this period, including effects such as HTTP caching, initialization, background activity and other transient conditions.
 
-#### Max Load / Steady State
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Max Load / Steady State
+</h4>
 
 The period during which the intended sustained workload is maintained. It represents the primary basis for evaluating sustained performance under the selected operating conditions.
 
-#### Whole Run
+<h4 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  Whole Run
+</h4>
 
 The complete execution period, including Ramp-Up and Max Load / Steady State. It provides overall execution context and allows events or trends spanning multiple periods to be considered.
 
-### 17.3 Reporting Layers
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  17.3 Reporting Layers
+</h3>
 
 Reporting should provide different levels of detail for different readers and investigative needs.
 
@@ -2635,16 +2989,20 @@ The reporting model may contain:
 
 The report should allow the reader to move from a high-level observation to the evidence supporting it without requiring the entire raw dataset to be presented in the main report.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - A useful performance report should not simply reproduce the dashboard produced by the load-generation tool: the number of metrics is much higher than in a standard results dashboard table.
->
->   *It must be not just informative but also readable!*
->
->   *Imagine yourself as a frontend developer and UI/UX designer for this problem.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>A useful performance report should not simply reproduce the dashboard produced by the load-generation tool: the number of metrics is much higher than in standard results dashboard table.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">It must be not just <b>informative</b> but also <b>readable</b>!<br/><br/>Imagine yourself as a frontend developer and UI/UX designer for this problem.</div>
+    </li>
+  </ul>
+</div>
 
-### 17.4 Performance Findings
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  17.4 Performance Findings
+</h3>
 
 Performance findings should be treated as engineering findings rather than simply failed test cases.
 
@@ -2681,7 +3039,9 @@ The final recommendation should identify an appropriate engineering owner where 
 
 ---
 
-## 18. Optimization Strategy
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  18. Optimization Strategy
+</h2>
 
 Performance optimization should be driven by measured evidence rather than by increasing resources or changing system configuration without understanding the limiting factor.
 
@@ -2694,20 +3054,16 @@ An optimization cycle should establish:
 5. the expected effect of that change
 6. the result of re-testing under comparable conditions
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Performance optimization is an iterative process.
->
->   *A performance test may identify a bottleneck, but the first optimization attempt may not resolve it completely or may move the bottleneck to another component.*
->
->   *Classic example: Database bottleneck → Database optimization → Database performance improves → Backend becomes limiting component → New optimization cycle.*
->
->   *The objective is therefore not simply to remove one bottleneck. It is to progressively improve the relationship between workload, system behaviour and infrastructure resource consumption.*
->
->   *Infrastructure optimization should also be considered together with application optimization. Increasing resources may increase capacity, but reducing the work required to support the same workload may produce a different and potentially more efficient result.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>Performance optimization is an iterative process.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">
+        A performance test may identify a bottleneck, but the first optimization attempt may not resolve it completely or may move the bottleneck to another component.
 
-A visualization of that classic example:
+Classic example:
 
 ```mermaid
 flowchart LR
@@ -2723,7 +3079,17 @@ flowchart LR
     class A,B,C,D,E box
 ```
 
-### 18.1 Optimization Cycle
+The objective is therefore not simply to remove one bottleneck. It is to progressively improve the relationship between <b>workload, system behaviour and infrastructure resource consumption</b>.
+
+Infrastructure optimization should also be considered together with application optimization. Increasing resources may increase capacity, but reducing the work required to support the same workload may produce a different and potentially more efficient result.
+      </div>
+    </li>
+  </ul>
+</div>
+
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  18.1 Optimization Cycle
+</h3>
 
 ```mermaid
 flowchart LR
@@ -2752,7 +3118,9 @@ The re-test should verify that:
 - the improvement did not introduce a new significant constraint
 - infrastructure resource usage changed as expected where resource efficiency was the objective.
 
-### 18.2 Optimization Targets
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  18.2 Optimization Targets
+</h3>
 
 Depending on the identified constraint, optimization may target:
 
@@ -2771,7 +3139,9 @@ Depending on the identified constraint, optimization may target:
 
 The optimization target should be selected according to the evidence collected during performance analysis rather than according to a predefined preference for application or infrastructure changes.
 
-### 18.3 Re-testing
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  18.3 Re-testing
+</h3>
 
 An optimization should be verified through a controlled re-test.
 
@@ -2790,7 +3160,9 @@ A change should be considered a demonstrated improvement only when the observed 
 
 ---
 
-## 19. Roles & Responsibilities
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  19. Roles & Responsibilities
+</h2>
 
 **Performance testing is a cross-functional engineering activity**. The responsibilities below describe the **capabilities and ownership areas** that should be covered rather than prescribing a specific organizational structure.
 
@@ -2816,16 +3188,20 @@ A change should be considered a demonstrated improvement only when the observed 
 | Engineering recommendations                     | Performance                                | Relevant technical owners                        |
 | Release / business decision                     | Appropriate organizational owner           | Performance, Development, DevOps, Product / BA   |
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - The table represents a generalized model rather than a mandatory organizational **RACI**.
->
->   *In a smaller organization, several responsibilities may belong to the same person. In a more mature organization, they may be distributed across dedicated Performance Engineering, Development, DevOps, DBA, Product, Business Analysis and Support functions.*
->
->   *Performance QA / Performance Engineer should primarily provide evidence and recommendations, while implementation and organizational decisions remain with the roles responsible for the affected system area or business decision.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>The table represents a generalized model rather than a mandatory organizational <b>RACI</b>.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">In a smaller organization, several responsibilities may belong to the same person. In a more mature organization, they may be distributed across dedicated Performance Engineering, Development, DevOps, DBA, Product, Business Analysis and Support functions.<br/><br/>Performance QA / Performance Engineer should primarily provide <b>evidence and recommendations</b>, while implementation and organizational decisions remain with the roles responsible for the affected system area or business decision.</div>
+    </li>
+  </ul>
+</div>
 
-### 19.1 Responsibility Principles
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  19.1 Responsibility Principles
+</h3>
 
 The **Performance** role is responsible for coordinating the performance investigation, defining the performance workload, executing and analysing tests, correlating evidence and providing recommendations.
 
@@ -2845,11 +3221,15 @@ Findings that cross application, infrastructure, database, messaging or business
 
 ---
 
-## 20. Automation & CI/CD
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  20. Automation & CI/CD
+</h2>
 
 Performance-testing activities should be automated where automation improves repeatability, reduces manual effort or provides useful feedback early in the development lifecycle.
 
-### 20.1 Automated Validation
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  20.1 Automated Validation
+</h3>
 
 Automated checks may be integrated into CI/CD for activities such as:
 
@@ -2863,29 +3243,35 @@ Automated checks may be integrated into CI/CD for activities such as:
 
 The objective is to detect broken performance-test infrastructure or obvious performance changes before a full performance investigation is required.
 
-### 20.2 Practical CI/CD Integration
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  20.2 Practical CI/CD Integration
+</h3>
 
 A practical automation pipeline can be structured as:
 
 1. **Validate**
-   - Test scripts
-   - Configuration
-   - Dependencies
-   - Required services
+
+   > Test scripts
+   > Configuration
+   > Dependencies
+   > Required services
 
 2. **Smoke**
-   - Execute a lightweight representative workflow
-   - Verify successful workload generation
-   - Verify basic workflow completion
+
+   > Execute a lightweight representative workflow
+   > Verify successful workload generation
+   > Verify basic workflow completion
 
 3. **Performance Check**
-   - Execute selected regression scenario
-   - Compare against the established reference
-   - Store results
+
+   > Execute selected regression scenario
+   > Compare against the established reference
+   > Store results
 
 4. **Decision**
-   - No significant change → pipeline continues
-   - Significant change → investigate / run extended test
+
+   > No significant change → pipeline continues
+   > Significant change → investigate / run extended test
 
 A lightweight smoke execution should remain small enough to provide fast feedback.
 
@@ -2897,11 +3283,15 @@ The exact pipeline stages, commands, thresholds and execution environment belong
 
 ---
 
-## 21. Architecture Principles for Performance Tooling
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  21. Architecture Principles for Performance Tooling
+</h2>
 
 The performance-testing solution should be designed to support the characteristics of the system and workload rather than merely generate a high volume of technical requests.
 
-### 21.1 Separation of Responsibilities
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  21.1 Separation of Responsibilities
+</h3>
 
 The performance-testing solution should separate major responsibilities such as:
 
@@ -2915,7 +3305,9 @@ The performance-testing solution should separate major responsibilities such as:
 
 A change in one responsibility should not require unnecessary changes to unrelated parts of the testing solution.
 
-### 21.2 Stateful Workload Support
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  21.2 Stateful Workload Support
+</h3>
 
 The tooling should support workflows in which one actor's actions depend on application state created or modified by another actor.
 
@@ -2927,7 +3319,9 @@ The solution should therefore be capable of representing:
 - cross-actor dependencies
 - required synchronization
 
-### 21.3 Asynchronous Communication Support
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  21.3 Asynchronous Communication Support
+</h3>
 
 The tooling should be capable of exercising and observing asynchronous communication relevant to the workload, including:
 
@@ -2936,7 +3330,9 @@ The tooling should be capable of exercising and observing asynchronous communica
 - WebSocket communication
 - asynchronous business events
 
-### 21.4 Extensible Observability
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  21.4 Extensible Observability
+</h3>
 
 The performance-testing solution should allow collection of metrics beyond default request statistics.
 
@@ -2948,49 +3344,61 @@ Custom metrics should be possible where required to represent:
 - actor activity
 - application-specific performance characteristics
 
-### 21.5 Distributed Execution
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  21.5 Distributed Execution
+</h3>
 
 The solution should support distributed workload generation when a single worker cannot generate the required workload.
 
 Distributed execution should preserve workload correctness, coordination and measurement consistency.
 
-### 21.6 Separation of Workload and Infrastructure
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  21.6 Separation of Workload and Infrastructure
+</h3>
 
 Application-specific workload logic should be separated from reusable testing infrastructure.
 
 This allows the same testing architecture to be adapted to another system by replacing system-specific authentication, workflows, communication handlers and monitoring queries without redesigning the complete testing solution.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Remember **SOLID** principles. Quite similar, right?
->
->   *Development of the whole Test Plan, not only the workload logic, is the same as the development of any other application. It follows the same programming principles and paradigms.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>Remember <b>SOLID</b> principles. Quite similar, right?
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">Development of the whole Test Plan, not only the workload logic, is the same as the development of any other application. It follows the same programming principles and paradigms.</div>
+    </li>
+  </ul>
+</div>
 
-### 21.7 Reproducibility
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  21.7 Reproducibility
+</h3>
 
 The performance-testing solution should allow a scenario to be executed repeatedly under documented conditions.
 
 Workload configuration, scenario version, environment configuration and test-data assumptions should therefore be identifiable for each execution.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - A Test Plan may not be the only part of the whole performance testing system.
->
->   *Let's take this case as an example.*
->
->   *We have a complex stateful system, and creating a seeding scenario would take too much time and would be too hard to support.*
->
->   *Why not create a pre-seeded database with data and restore our test environment database with it?*
->
->   *Automate the restoration process with a script, and this script becomes an additional part of the whole testing process.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>Test Plan can be not the only part of the whole performance testing system.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">Let's take this case as an example.<br/><br/>We have a complex stateful system, and creating a seeding scenario would take too much time and would be too hard to support.<br/><br/>Why not create a pre-seeded database with data and restore our test environment database with it?<br/><br/>Automate the restoration process with a script, and this script becomes an additional part of the whole testing process.</div>
+    </li>
+  </ul>
+</div>
 
-### 21.8 Evidence Preservation
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  21.8 Evidence Preservation
+</h3>
 
 The tooling architecture should support independent persistence of performance evidence so that results remain available for historical comparison even when operational metrics have limited retention.
 
-### 21.9 Implementation Independence
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  21.9 Implementation Independence
+</h3>
 
 These principles describe required capabilities and architectural properties of the performance-testing solution.
 
@@ -2998,7 +3406,9 @@ They do not prescribe a particular performance-testing framework or implementati
 
 ---
 
-## 22. Tooling Strategy
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  22. Tooling Strategy
+</h2>
 
 Performance-testing tools should be selected according to the requirements of the workload, system architecture and observability model defined by this Strategy.
 
@@ -3042,27 +3452,29 @@ flowchart LR
 
 The concrete tools, libraries, services and configurations used to implement these capabilities belong to the implementation and Test Plan documentation.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - All performance testing frameworks, whether it is Gatling, JMeter, or k6, have their own strengths and weaknesses.
->
->   *From experience, for stateful systems, there is no perfect tool.*
->
->   *All of them would require a certain level of customization via extending functionality by scripts or separate services.*
->
->   *Moreover, most of the time, there is not even a possibility to choose a tool because companies prefer to have everything done in one stack and choose a tool for you.*
-> - For practical examples of how similar performance-testing principles can be implemented:
->
->   *[k6 Performance Testing Framework](https://github.com/Netheria/k6-Performance-Testing-Framework)*
->
->   *[JMeter Performance Testing Framework](https://github.com/Netheria/JMeter-Performance-Testing-Framework)*
->
->   *These repositories are not direct implementations of this strategy, but the closest practical references that apply comparable ideas.*
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>All performance testing frameworks, whether it is Gatling, JMeter, or k6, have their own strengths and weaknesses.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">From experience, for stateful systems, there is no perfect tool.<br/><br/>All of them would require a certain level of customization via extending functionality by scripts or separate services.<br/><br/>Moreover, most of the time, there is not even a possibility to choose a tool because companies prefer to have everything done in one stack and choose a tool for you.</div><br/>
+    </li>
+    <li>For practical examples of how similar performance-testing principles can be implemented:<br/>
+    <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">
+      <a href="https://github.com/Netheria/k6-Performance-Testing-Framework">k6 Performance Testing Framework</a><br/>
+      <a href="https://github.com/Netheria/JMeter-Performance-Testing-Framework">JMeter Performance Testing Framework</a><br/><br/>
+      These repositories are not direct implementations of this strategy, but the closest practical references that apply comparable ideas.
+    </div>
+    </li>
+  </ul>
+</div>
 
 ---
 
-## 23. Future Extension Points
+<h2 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  23. Future Extension Points
+</h2>
 
 The current Strategy defines a core performance-testing scope for the target system.
 
@@ -3070,7 +3482,9 @@ Additional performance investigations can be introduced when new business requir
 
 Each extension below represents a possible expansion of the current Strategy rather than a requirement of the core process.
 
-### 23.1 Detailed Network Performance
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  23.1 Detailed Network Performance
+</h3>
 
 **Implementation**
 
@@ -3082,7 +3496,9 @@ Depending on the investigation, this may include latency, packet loss, bandwidth
 
 Allows network-related constraints to be distinguished from application, Connector or Message Broker performance problems.
 
-### 23.2 Deep Database Performance Analysis
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  23.2 Deep Database Performance Analysis
+</h3>
 
 **Implementation**
 
@@ -3092,7 +3508,9 @@ Extend database monitoring beyond application-relevant query and connection metr
 
 Provides evidence for database-specific bottlenecks and supports targeted database optimization when database behaviour is identified as a limiting factor.
 
-### 23.3 Browser / User Interface Performance
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  23.3 Browser / User Interface Performance
+</h3>
 
 **Implementation**
 
@@ -3104,7 +3522,9 @@ The measurements should remain correlated with backend and WebSocket activity so
 
 Extends the strategy from backend/workflow performance to the actual user-interface experience.
 
-### 23.4 Telephony Performance
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  23.4 Telephony Performance
+</h3>
 
 **Implementation**
 
@@ -3114,7 +3534,9 @@ Introduce telephony-specific workload generation and observability for conversat
 
 Allows performance characteristics of voice-based customer interactions to be evaluated using a workload model appropriate to telephony rather than treating them as ordinary messaging workflows.
 
-### 23.5 Volume Testing
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  23.5 Volume Testing
+</h3>
 
 **Implementation**
 
@@ -3124,7 +3546,9 @@ Introduce dedicated scenarios for unusually large data volumes, payloads or stor
 
 Identifies performance behaviour caused primarily by data volume rather than concurrent workload.
 
-### 23.6 Security-Related Performance
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  23.6 Security-Related Performance
+</h3>
 
 **Implementation**
 
@@ -3136,7 +3560,9 @@ Security testing itself remains a separate discipline.
 
 Allows security controls to be evaluated not only for functional and security properties but also for their impact on system performance.
 
-### 23.7 Accessibility / Compatibility Performance Investigation
+<h3 style="color:#B8860B; margin-top:0; margin-bottom:14px; border-bottom:1px solid rgba(184,134,11,0.3); padding-bottom:6px; font-weight:600;">
+  23.7 Accessibility / Compatibility Performance Investigation
+</h3>
 
 **Implementation**
 
@@ -3146,19 +3572,15 @@ Extend selected scenarios across relevant browsers, devices, client configuratio
 
 Identifies performance differences that may be invisible when testing a single client configuration.
 
-> [!TIP]
-> 💬 **Commentary**
->
-> - Future extensions should be added only when they answer a meaningful engineering question.
->
->   *Can you answer the following topics?*
->
->   *Performance Objective → Workload / Scenario → Observability → Analysis Method → Expected Engineering Benefit*
->
->   *If the answer is yes, then the expansion point can be added.*
-
-A visualization of the extension-checklist relationship:
-
+<div style="color:#00A1A1; border-left:4px solid #00A1A1; background:rgba(0,161,161,0.07); padding:14px 20px; border-radius:0 8px 8px 0;">
+  <p style="font-size:20px; margin:0 0 12px 0;">
+    <b>💬 Commentary</b>
+  </p>
+  <ul style="margin:0; padding-left:22px;">
+    <li>Future extensions should be added only when they answer a meaningful engineering question.
+      <div style="border-left:3px solid rgba(0,161,161,0.55); margin-top:8px; padding:6px 14px; font-style:italic; opacity:0.9;">
+        Can you answer the following topics?
+        
 ```mermaid
 flowchart LR
     A["<b>Performance<br/>Objective</b>"]
@@ -3172,3 +3594,9 @@ flowchart LR
     classDef box stroke:#00A1A1,stroke-width:2px,color:#00A1A1,font-weight:bold,border-radius:10px
     class A,B,C,D,E box
 ```
+
+If the answer is <b>yes</b>, then the expansion point can be added.
+      </div>
+    </li>
+  </ul>
+</div>
