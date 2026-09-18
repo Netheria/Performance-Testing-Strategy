@@ -11,7 +11,7 @@
 **A theoretical, evidence-driven performance testing strategy for a distributed, stateful contact-center system.**
 
 <p align="center">
-  <img src="./assets/performance_testing_strategy_roadmap.png" width="100%" alt="Illustrative performance testing strategy roadmap: Foundation, Core performance cycle, Engineering feedback, Automation and operationalization">
+  <img src="../assets/performance_testing_strategy_roadmap.png" width="100%" alt="Illustrative performance testing strategy roadmap: Foundation, Core performance cycle, Engineering feedback, Automation and operationalization">
 </p>
 
 <p align="center"><i>Illustrative only: methodology, not a fixed calendar.<br/>Foundation → Core performance cycle → Engineering feedback → Automation.</i></p>
